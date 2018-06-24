@@ -3,24 +3,37 @@ jobs:
   build:
     machine: true
     environment:
-      VERSION: 0.1
+      BASE_VERSION: 0.1
     steps:
       - checkout
       - run: 
           name: Check if Singularity recipe exists
           command: test -f Singularity
       - run:
-          name: Set-up singularity
+          name: Set-up singularity and sregistry
           command: |
             chmod u+x *.sh
             /bin/bash setup.sh
       - run:
-          name: Checking singularity build
+          name: Test Singularity
           command: |
               singularity selftest
       - run:
-          name: Building singularity container
+          name: Build image from Singularity recipe
           command: |
-              export BUILD_NAME=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${VERSION}.${CIRCLE_BUILD_NUM}
-              sudo singularity build $BUILD_NAME.simg Singularity
+              export IMAGE_FILE=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
+              sudo singularity build ${IMAGE_FILE} Singularity
+              test -f $IMAGE_FILE
+      - run:
+          name: Test the image... Marco!"
+          command: |
+              singularity exec $IMAGE_FILE echo "Polo!"
+      - run:
+          name: Deploy the image
+          command: |
+              git config --global user.email $GH_EMAIL
+              git config --global user.name $GH_NAME
+              cp Singularity Singularity.${BASE_VERSION}.${CIRCLE_BUILD_NUM}
+              git commit -m "Deploy ${BASE_VERSION}.${CIRCLE_BUILD_NUM}"
+              git push 
       
