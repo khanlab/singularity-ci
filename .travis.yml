@@ -19,7 +19,7 @@ before_install:
 
 script:
                                # recipe
-  - /bin/bash .travis/build.sh --uri $ENDPOINT_UUID --cli globus Singularity
+  - /bin/bash build.sh --uri $ENDPOINT_UUID --cli globus Singularity
 
   #- /bin/bash build.sh Singularity
 
