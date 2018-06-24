@@ -6,7 +6,7 @@ jobs:
       VERSION: 0.1
     steps:
       - checkout
-      -run: 
+      - run: 
           name: Check if Singularity recipe exists
           command: test -f Singularity
       - run:
