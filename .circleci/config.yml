@@ -22,5 +22,5 @@ jobs:
           name: Building singularity container
           command: |
               export BUILD_NAME=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${VERSION}.${CIRCLE_BUILD_NUM}
-              singularity build $BUILD_NAME.simg Singularity
+              sudo singularity build $BUILD_NAME.simg Singularity
       
