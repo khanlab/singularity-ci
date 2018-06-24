@@ -4,6 +4,8 @@ jobs:
     machine: true
     environment:
       BASE_VERSION: 0.1
+      TAG: ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
+      IMAGE_FILE: ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${TAG}.simg
     steps:
       - checkout
       - run: 
@@ -21,7 +23,6 @@ jobs:
       - run:
           name: Build image from Singularity recipe
           command: |
-              export IMAGE_FILE=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
               sudo singularity build ${IMAGE_FILE} Singularity
               test -f $IMAGE_FILE
       - run:
