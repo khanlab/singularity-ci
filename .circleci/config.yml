@@ -26,7 +26,6 @@ jobs:
       - run:
           name: Build image from Singularity recipe
           command: |
-#              export IMAGE_FILE=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
               sudo singularity build container.simg Singularity
               test -f container.simg
       -persist_to_workspace:
@@ -68,3 +67,5 @@ workflows:
 #              git add Singularity.${BASE_VERSION}.${CIRCLE_BUILD_NUM}
 #              git commit -m "Deploy ${BASE_VERSION}.${CIRCLE_BUILD_NUM}"
 #              git push 
+#
+#              export IMAGE_FILE=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
