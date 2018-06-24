@@ -16,5 +16,5 @@ jobs:
       - run:
           name: Checking singularity build
           command: |
-              singularity selfttest
+              singularity selftest
       
