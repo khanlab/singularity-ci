@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: machine
+    environment:
+      ORG: khanlab
+      NAME: prepdwi
+      VERSION: 0.1
+    steps:
+      - checkout
+      - run:
+          name: Set-up singularity
+          command: |
+            setup.sh
+      - run:
+          name: Checking singularity build
+          command: |
+              singularity selfttest
+      
