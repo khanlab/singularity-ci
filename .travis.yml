@@ -21,6 +21,7 @@ script:
                                # recipe
   - /bin/bash build.sh Singularity
 
+
   # Examples with upload to storage clients defined by sregistry
   # https://singularityhub.github.io/sregistry-cli/clients
   # Environment variables must be defined in CI encrypted secrets/settings
