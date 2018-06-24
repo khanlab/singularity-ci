@@ -4,8 +4,6 @@ jobs:
     machine: true
     environment:
       BASE_VERSION: 0.1
-      TAG: ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
-      IMAGE_FILE: ${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${TAG}.simg
     steps:
       - checkout
       - run: 
@@ -23,11 +21,13 @@ jobs:
       - run:
           name: Build image from Singularity recipe
           command: |
+              export IMAGE_FILE=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
               sudo singularity build ${IMAGE_FILE} Singularity
               test -f $IMAGE_FILE
       - run:
           name: Test the image... Marco!"
           command: |
+              export IMAGE_FILE=${CIRCLE_PROJECT_USERNAME}_${CIRCLE_PROJECT_REPONAME}_${BASE_VERSION}.${CIRCLE_BUILD_NUM}.simg
               singularity exec $IMAGE_FILE echo "Polo!"
       - run:
           name: Deploy the image
@@ -35,6 +35,6 @@ jobs:
               git config --global user.email $GH_EMAIL
               git config --global user.name $GH_NAME
               cp Singularity Singularity.${BASE_VERSION}.${CIRCLE_BUILD_NUM}
+              git add Singularity.${BASE_VERSION}.${CIRCLE_BUILD_NUM}
               git commit -m "Deploy ${BASE_VERSION}.${CIRCLE_BUILD_NUM}"
               git push 
-      
