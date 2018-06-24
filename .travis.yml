@@ -19,7 +19,9 @@ before_install:
 
 script:
                                # recipe
-  - /bin/bash build.sh Singularity
+  - /bin/bash .travis/build.sh --uri $ENDPOINT_UUID --cli globus Singularity
+
+  #- /bin/bash build.sh Singularity
 
 
   # Examples with upload to storage clients defined by sregistry
