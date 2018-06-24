@@ -1,8 +1,7 @@
 version: 2
 jobs:
   build:
-    docker:
-      - image: machine
+    machine: true
     environment:
       ORG: khanlab
       NAME: prepdwi
