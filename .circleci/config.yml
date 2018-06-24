@@ -11,7 +11,7 @@ jobs:
       - run:
           name: Set-up singularity
           command: |
-            setup.sh
+            ./setup.sh
       - run:
           name: Checking singularity build
           command: |
