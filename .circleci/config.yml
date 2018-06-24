@@ -29,10 +29,10 @@ jobs:
               sudo singularity build container.simg Singularity
               test -f container.simg
       - persist_to_workspace:
-        root: /tmp
-        paths:
-          - container.simg
-          - Singularity
+          root: /tmp
+          paths:
+            - container.simg
+            - Singularity
 
 
 
